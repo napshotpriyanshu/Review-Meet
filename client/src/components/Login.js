@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import { Link , useNavigate} from "react-router-dom";
-import './Login.css'
-import logo from "../../images/logo.png";
-import login_png from "../../images/image3.png";
+import logo from "../images/logo.png";
+import login_png from "../images/image3.png";
+import axios from "axios";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -22,22 +22,16 @@ const Login = () => {
     
     const handleClick = async(event)=>{
         const{username, password} = userLogin;
-        const res = await fetch("/Login",{
-            method: "POST",
-            headers:{
-                "Content-Type" : "application/json"
-            },
-            body: JSON.stringify({
-                username, password
-            })
-        });
-        const data = await res.json();
-        console.log(data.status);
-        if(!data || data.status === 400){
+        
+        const res = await axios.post("/Login", userLogin);
+        
+        if(!res || res.data.status === 400){
             console.log("Invalid Data");
         }else{
-            navigate('/Signup');
+            navigate('/home');
             console.log("Successfull");
+            console.log(res);
+            
         }
     }
 
@@ -51,7 +45,7 @@ const Login = () => {
 
     return (
 
-        <div className="container">
+        <div className="container1">
 
             <div className="left-side">
                 <div className="logo-img">

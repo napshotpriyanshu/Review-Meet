@@ -1,8 +1,8 @@
 import React, { useState} from "react";
 import { Link,useNavigate } from "react-router-dom";
-import './Signup.css'
-import logo from "../../images/logo.png";
-import signup_png from "../../images/image4.png";
+import logo from "../images/logo.png";
+import signup_png from "../images/image4.png";
+import axios from "axios";
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -23,17 +23,12 @@ const Signup = () => {
 
     const handleClick= async(event)=>{
         const{name,email, username, password}= user;
-        const res = await fetch("/Signup",{
-            method: "POST",
-            headers:{
-                "Content-Type" : "application/json"
-            },
-            body: JSON.stringify({
-                name,email, username, password
-            })
-        });
-        const data = await res.json();
-        if(!data || data.status === 422){
+      
+
+        const res = await axios.post("/signup", user);
+
+
+        if(!res || res.data.status === 422){
             console.log("Invalid Data");
         }else{
             navigate('/');
@@ -48,7 +43,7 @@ const Signup = () => {
 
 
     return (
-        <div className="container">
+        <div className="container1">
             <div className="left-side">
                 <div className="logo-img">
                     <img src={logo} id='logo-img-id' alt="logo" />
@@ -58,8 +53,8 @@ const Signup = () => {
             <div className="right-side">
                 <div className="rs-box">
                     <div className="container2">
-                        <img src={signup_png} alt="signup png" id="signup-png-id" />
-                        <h1 className="signup_title">SIGN UP</h1>
+                        <img src={signup_png} alt="signup png" id="login-png-id" />
+                        <h1 className="login_title">SIGN UP</h1>
                         
                         <div className="input-form">
                             <form method="POST" onSubmit={handleSubmit}>

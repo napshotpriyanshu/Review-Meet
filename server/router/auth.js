@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/userSchema');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const authenticate = require("../middleware/authenticate");
 
 
 
@@ -55,19 +56,21 @@ try{
         const token = await userLogin.generateAuthToken(); 
 
         res.cookie("jwtoken",token,{
-            expires:new Date(Date.now()+ 18000000),
+            httpOnly: true,
+            expires:new Date(Date.now()+ 18000000)
         });
 
         if (!checkPass) {
             res.status(400).json({ error: "user error" });
         } else {
-            res.json({ message: "user signin successfully" });
+            res.status(200).json({status:200,message: "user signin successfully" });
         }
 
     }else{
         res.status(400).json({error: "Incorrect details"});
     }
 
+    
 
 }catch(err) {
     console.log(err);
@@ -75,5 +78,14 @@ try{
 
 });
 
+router.get('/home', authenticate ,(req, res)=>{
+res.send(req.admin);
+});
+
+router.get('/logout', (req,res) =>{
+    console.log("Logout");
+    res.clearCookie('jwtoken', {path:'/'});
+    res.status(200).send('Logout User');
+});
 
 module.exports = router;

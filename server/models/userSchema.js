@@ -28,6 +28,29 @@ const userSchema = new mongoose.Schema({
             type: String,
             required:true
         }
+    }],
+    candidate:[{
+        name:{
+            type: String,
+        },
+        email:{
+            type: String
+        },
+        phone:{
+            type: Number
+        },
+        interview:[{
+            quetion:[{
+                comment:{
+                    type: String
+                },
+                rating:{
+                    type: String
+                }
+            }]
+        }]
+
+
     }]
     
 });
