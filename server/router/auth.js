@@ -31,6 +31,9 @@ router.post('/Signup', async (req, res) => {
         await user.save();
 
         res.status(201).json({ message: "user registered successfully" });
+        
+			
+
 
     }catch (err) {
         console.log(err);
@@ -48,8 +51,7 @@ try{
     }
 
     const userLogin = await User.findOne({ username: username });
-    
-
+   
     if(userLogin){
         const checkPass = await bcrypt.compare(password, userLogin.password);
 
@@ -63,7 +65,16 @@ try{
         if (!checkPass) {
             res.status(400).json({ error: "user error" });
         } else {
-            res.status(200).json({status:200,message: "user signin successfully" });
+            // res.status(200).json({status:200,message: "user signin successfully" });
+            res.status(200).send({
+				token,
+				username:username,
+				email: userLogin.email,
+				id: userLogin._id,
+				createdAt: userLogin.createdAt,
+				updatedAt: userLogin.updatedAt,
+			});
+        
         }
 
     }else{

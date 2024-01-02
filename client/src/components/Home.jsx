@@ -9,13 +9,12 @@ import axios from "axios";
 const Home=()=>{
     const navigate = useNavigate();
 
-    const [userData , setUserData] = useState();
-    let i=1;
+    // const [userData , setUserData] = useState();
+    // let i=1;
 
     const callHome = async()=>{
         try{
             const res = await axios.get('/home');
-            setUserData(res.data);
         }catch(err){
             console.log(err);
             navigate('/');
@@ -26,16 +25,15 @@ const Home=()=>{
         callHome();
     },[]);
     
-    console.log(userData?.newCandidate);
-
-    userData?.newCandidate.map((user)=>(
-        console.log(user.name)
-    ));
+    
+    // userData?.newCandidate.map((user)=>(
+    //     console.log(user.name)
+    // ));
     return(
         <div>
             <Navbar/>
             <div >
-                 <h1 className="user-title"> Welcome {userData?.name}</h1>
+                 {/* <h1 className="user-title"> Welcome {userData?.name}</h1> */}
             </div>
             <div className="container3">
                 <div className="add-icon-bg">
@@ -58,7 +56,7 @@ const Home=()=>{
                     </TableRow>
             </TableHead>
             <TableBody>
-                {userData?.newCandidate?.map((user)=>(
+                {/* {userData?.newCandidate?.map((user)=>(
                     <TableRow key={user.id}>
                         
                         <TableCell>{i++}</TableCell>
@@ -66,7 +64,7 @@ const Home=()=>{
                         <TableCell>{user.email}</TableCell>
                         <TableCell>{user.phone}</TableCell>
                     </TableRow>
-                ))}
+                ))} */}
 
             </TableBody>
             </Table>

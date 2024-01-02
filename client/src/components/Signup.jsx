@@ -1,11 +1,15 @@
 import React, { useState} from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../images/logo.png";
 import signup_png from "../images/image4.png";
-import axios from "axios";
+import { register } from '../redux/authSlice';
+import {useDispatch} from 'react-redux';
+
+
 
 const Signup = () => {
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
 
     const [user, setUser] = useState({
         name:"", username:"",email:"",password:""
@@ -25,15 +29,26 @@ const Signup = () => {
         // const{name,email, username, password}= user;
       
 
-        const res = await axios.post("/signup", user);
+        // const res = await axios.post("/signup", user);
 
 
-        if(!res || res.data.status === 422){
-            console.log("Invalid Data");
-        }else{
-            navigate('/');
-            console.log("Successfull");
-        }
+        // if(!res || res.data.status === 422){
+        //     console.log("Invalid Data");
+        // }else{
+        //     navigate('/');
+        //     console.log("Successfull");
+        // }
+
+        
+        dispatch(
+            register({
+                username:user.username,
+                password:user.password,
+                email:user.email,
+                name:user.name,
+            })
+        );
+
     }
 
 
