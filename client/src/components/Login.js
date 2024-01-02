@@ -21,7 +21,7 @@ const Login = () => {
         
     
     const handleClick = async(event)=>{
-        const{username, password} = userLogin;
+        // const{username, password} = userLogin;
         
         const res = await axios.post("/Login", userLogin);
         

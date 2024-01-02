@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/userSchema");
+const {User} = require("../models/userSchema");
 const cookieParser = require('cookie-parser');
 const express = require('express');
 
@@ -9,8 +9,9 @@ app.use(cookieParser());
 
 
 const authenticate = async(req,res,next)=>{
+
     try{
-        const token = req.cookies.jwtoken;
+        const token = await req.cookies.jwtoken;
         const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
         const admin = await User.findOne({_id:verifyToken._id, "tokens.token": token});
 

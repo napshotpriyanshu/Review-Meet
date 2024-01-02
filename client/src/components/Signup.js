@@ -22,7 +22,7 @@ const Signup = () => {
     }
 
     const handleClick= async(event)=>{
-        const{name,email, username, password}= user;
+        // const{name,email, username, password}= user;
       
 
         const res = await axios.post("/signup", user);

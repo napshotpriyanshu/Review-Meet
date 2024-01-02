@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/userSchema');
+const {User} = require('../models/userSchema');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const authenticate = require("../middleware/authenticate");
@@ -88,4 +88,20 @@ router.get('/logout', (req,res) =>{
     res.status(200).send('Logout User');
 });
 
+
+// router.post('/addcandidate',authenticate ,async(req,res)=>{
+
+//     res.status(201).json({ message: "user registered successfully" });
+//     const {name, email, phone} = req.body;
+
+//     const userDataID= req.userID;
+
+//     console.log(userDataID);
+//     try {
+//         await User.updateOne({_id: userDataID}, {$push:{newCandidate:req.body}});
+//         return res.status(200).json({})
+//     } catch (err) {
+//         return res.status(400).json({ error: "user error" })
+//     }
+// })
 module.exports = router;

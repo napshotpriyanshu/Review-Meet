@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 
-
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -29,31 +28,31 @@ const userSchema = new mongoose.Schema({
             required:true
         }
     }],
-    candidate:[{
-        name:{
-            type: String,
-        },
-        email:{
-            type: String
-        },
-        phone:{
-            type: Number
-        },
-        interview:[{
-            quetion:[{
-                comment:{
-                    type: String
-                },
-                rating:{
-                    type: String
-                }
-            }]
-        }]
+    // newCandidate: [{
+    //     name:{
+    //         type: String,
+    //     },
+    //     email:{
+    //         type: String
+    //     },
+    //     phone:{
+    //         type: Number
+    //     },
+    //     interview:[{
+    //         quetion:[{
+    //             comment:{
+    //                 type: String
+    //             },
+    //             rating:{
+    //                 type: String
+    //             }
+    //         }]
+    //     }]
 
 
-    }]
-    
+    // }]
 });
+
 
 userSchema.pre('save', async function(next){
     if(this.isModified('password')){
@@ -78,6 +77,9 @@ userSchema.methods.generateAuthToken = async function() {
     }
 }
 
+
 const User = mongoose.model('users', userSchema);
 
-module.exports = User;
+module.exports = {
+    User
+}

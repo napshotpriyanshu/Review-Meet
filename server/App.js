@@ -11,7 +11,8 @@ require('./db/conn');
 
 app.use(express.json());
 app.use(cookiParser());
-app.use(cors());
+// app.use(cors());
+
 app.use(require('./router/auth'));
 
 app.listen(4000,function(){
