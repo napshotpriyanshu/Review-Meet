@@ -4,7 +4,6 @@ import { Routes, Route, Link } from "react-router-dom";
 
 import Login from './components/Login';
 import Signup from './components/Signup';
-import Home from './components/Home';
 // import AddCandidate from './components/AddCandidate';
 import CandidateManage from './pages/candidateManage/CandidateManage';
 import Interview from './components/interview';
@@ -19,7 +18,6 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Login />} />
           <Route exact path="/signup" element={<Signup />} />
-          <Route exact path="/home" element={<Home />} />
           <Route exact path="/candidatemanager" element={<CandidateManage />} />
           <Route exact path="/interview" element={<Interview />} />
           <Route exact path="/logout" element={<Logout />} />

@@ -72,7 +72,6 @@ try{
 				email: userLogin.email,
 				id: userLogin._id,
 				createdAt: userLogin.createdAt,
-				updatedAt: userLogin.updatedAt,
 			});
         
         }
@@ -152,6 +151,49 @@ router.get('/getcandi' , async (req, res)=>{
     } catch (error) {
         console.log(error);
         return res.status(400).send(error);
+    }
+});
+
+router.put('/:id', async(req,res)=>{
+    const {id, status, string} =req.body;
+    try {
+        const candi = await candidate.findById({_id:id});
+        if(string == 'backword'){
+            if(candi.status=='Selected'){
+                candi.status = 'On Hold';
+                candi.save();
+                return res.send(candi);
+            }
+            else if(candi.status=='On Hold'){
+                candi.status = 'Not Selected';
+                candi.save();
+                return res.send(candi);
+            }
+            else if(candi.status=='Not Selected'){
+                candi.status = 'Pending';
+                candi.save();
+                return res.send(candi);
+            }
+        }
+        else if (string == 'forward'){
+            if(candi.status=='Pending'){
+                candi.status = 'Not Selected';
+                candi.save();
+                return res.send(candi);
+            }
+            else if(candi.status=='Not Selected'){
+                candi.status = 'On Hold';
+                candi.save();
+                return res.send(candi);
+            }
+            else if(candi.status=='On Hold'){
+                candi.status = 'Selected';
+                candi.save();
+                return res.send(candi);
+            }
+        }
+    } catch (error) {
+        console.log(error);
     }
 });
 

@@ -99,7 +99,7 @@ export const login = (user) => async (dispatch) => {
         if (res) {
             localStorage.setItem('auth',JSON.stringify(res.data));
 			dispatch(loginSuccess(res.data));
-            history.push('/home');
+            history.push('/dashboard');
             window.location.reload();
 			
 		} else {

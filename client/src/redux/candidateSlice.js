@@ -83,3 +83,19 @@ export const getAllCandi = (token, id) => async (dispatch) => {
         dispatch(getAllCandidateFailed());        
     }
 };
+
+export const ArrowClickButton = (item,string) => async (dispatch)=>{
+    const candiData ={
+        id:item._id,
+        status:item.status,
+        string: string, 
+    }
+    
+    try {
+      const res = await axios.put(`/${candiData.id}`, candiData) 
+      if(res) window.location.reload(); 
+    } catch (error) {
+        console.log(error)
+    }
+
+};

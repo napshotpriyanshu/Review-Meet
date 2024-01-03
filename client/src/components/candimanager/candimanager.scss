@@ -16,3 +16,30 @@
     }
 
 }
+.list-candidate{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    align-items: left;
+    justify-content:space-between;
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+
+    button{
+        border: none;
+        outline: none;
+        background: none;
+    }
+
+}
+.bold{
+    font-weight: 800;
+}
+.green{
+    background-color: rgb(70, 177, 70);
+}
+.red{
+    background-color: rgb(208, 39, 39);
+}
+.action-button{
+    font-size: 1rem;
+}

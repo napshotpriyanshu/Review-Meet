@@ -1,10 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './dashboard.scss';
 import Sidebar from '../sidebar/Sidebar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Navbar from '../Navbar';
+import axios from 'axios';
 
 const Dashboard = () => {
+
+  const navigate = useNavigate();
+    
+    const callHome = async()=>{
+        try{
+            const res = await axios.get('/home');
+        }catch(err){
+            console.log(err);
+            navigate('/');
+        }
+    } 
+
+    useEffect(()=>{
+        callHome();
+    },[]);
+    
+
   return (
+    <div>
+      <Navbar />
     <div className='dashboard'>
       <div className="dashboard_left">
         <Sidebar />
@@ -17,12 +38,8 @@ const Dashboard = () => {
           <div className="on_hold box">On Hold</div>
           <div className="selected_candi box">Selected</div>
         </div>
-        <div className="createButton">
-          <Link to={"/candidatemanager"} className='button'>
-            Add Candidate
-          </Link>
-        </div>
       </div>
+    </div>
     </div>
   )
 }
