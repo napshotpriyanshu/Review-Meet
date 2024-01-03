@@ -1,0 +1,11 @@
+.candimanager{
+    width: 100%;
+    display: flex;
+    &_left{
+        width: 15%;
+    }
+    // &_right{
+    //     display: flex;
+    //     flex-direction: row;
+    // }
+}

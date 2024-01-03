@@ -4,7 +4,7 @@ const {User} = require('../models/userSchema');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const authenticate = require("../middleware/authenticate");
-
+const candidate = require('../models/candidate.model');
 
 
 
@@ -115,4 +115,44 @@ router.get('/logout', (req,res) =>{
 //         return res.status(400).json({ error: "user error" })
 //     }
 // })
+
+router.post('/addcandi', authenticate, async(req, res)=>{
+    // console.log(req.body);
+
+    const {name, email, phone} =req.body.candidate;
+    const id = req.body.id;
+
+
+    try {
+        if(!name || !email || !phone) return res.status(400).send('pls enter details');
+       
+        const candi = await new candidate({ 
+            name, 
+            email, 
+            phone,
+            cretedBy: id
+        });
+        await candi.save();
+
+        return res.status(200).send(candi);
+
+        
+    } catch (error) {
+        return res.status(400).send('candiate added failed');
+    }
+
+})
+
+router.get('/getcandi' , async (req, res)=>{
+    try {
+        // const {token, id} = req.body;
+        console.log(req.query);
+        const candiList = await candidate.find({cretedBy:req.query.id});
+        res.status(200).send(candiList);
+    } catch (error) {
+        console.log(error);
+        return res.status(400).send(error);
+    }
+});
+
 module.exports = router;
