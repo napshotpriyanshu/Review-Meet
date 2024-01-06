@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const authenticate = require("../middleware/authenticate");
 const candidate = require('../models/candidate.model');
+const interview = require('../models/interview.modal');
 
 
 
@@ -146,7 +147,7 @@ router.post('/addcandi', authenticate, async(req, res)=>{
 router.get('/getcandi' , async (req, res)=>{
     try {
         // const {token, id} = req.body;
-        console.log(req.query);
+        // console.log(req.query);
         const candiList = await candidate.find({cretedBy:req.query.id});
         res.status(200).send(candiList);
     } catch (error) {
@@ -201,9 +202,28 @@ router.put('/:id', async(req,res)=>{
 
 router.post('/interview', async (req, res) => {
 
-    console.log(req.body);
+    try {
+    const interviewExist = await interview.findOne({cretedBy:req.body.id});
+        if(interviewExist) return res.status(422).json({ error: "Interview already Done check result" })
 
-    
+    const objInterview1=req.body.interview[0];
+    const objInterview2=req.body.interview[1];
+    const objInterview3=req.body.interview[2];
+    // console.log(objInterview1);
+    const inter = await new interview({
+        cretedBy: req.body.id,
+        
+        interviewDetails:[objInterview1,objInterview2,objInterview3]
+    });
+
+    await inter.save();
+    console.log(inter);
+    return res.status(200).send(inter);
+       
+    } catch (error) {
+        console.log(error);  
+        return res.status(400).send('interview failed');  
+    }
 });
 
 module.exports = router;

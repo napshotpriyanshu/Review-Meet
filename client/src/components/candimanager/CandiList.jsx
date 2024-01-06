@@ -27,9 +27,13 @@ const CandiList = () => {
     dispatch(ArrowClickButton(item, string));
   }
 
-  const handleClick=(item)=>{
+  const handleClickInterview=(item)=>{
     navigate("/interview",{state:item})
   }
+
+ const handleClickResult =()=>{
+    navigate("/result", null)
+ }
 
   return (
     <div><h3>Candidate List</h3>
@@ -67,11 +71,11 @@ const CandiList = () => {
           </li>
 
           <li> 
-              <button onClick={()=>handleClick(item)} >INTERVIEW</button> 
+              <button onClick={()=>handleClickInterview(item)} >INTERVIEW</button> 
           </li>
 
           <li>
-                0/5
+          <button onClick={()=>handleClickResult(item)} > View </button>
           </li>
 
         </ul>

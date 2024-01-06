@@ -4,6 +4,7 @@ import './interview.scss'
 import Sidebar from '../sidebar/Sidebar'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { interviewPlace } from '../../redux/interviewSlice';
 
 const Interview = () => {
     
@@ -51,11 +52,12 @@ const Interview = () => {
             interview[count].rating=rating;
             setRating(0);
 
-            var interviewJSON = JSON.stringify(interview);
-            localStorage.setItem('questions',interviewJSON);
+            // var interviewJSON = JSON.stringify(interview);
+            // localStorage.setItem('questions',interviewJSON);
 
+            dispatch(interviewPlace(interview, candi._id));
             
-            navigate('/result');
+            navigate('/result', interview);
         }
 
     }
