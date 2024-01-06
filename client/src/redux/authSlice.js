@@ -113,3 +113,11 @@ export const login = (user) => async (dispatch) => {
         
     }
 };
+
+export const getuserdata = (user) => async (dispatch) => {
+    try {
+        
+    } catch (error) {
+        console.log(error);
+    }
+}

@@ -4,6 +4,9 @@ import { ArrowClickButton, getAllCandi } from '../../redux/candidateSlice';
 import { HiArrowCircleLeft, HiArrowCircleRight } from "react-icons/hi";
 import { MdDeleteSweep } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
+import { Link, useNavigate } from 'react-router-dom';
+
+
 
 const CandiList = () => {
   const auth = useSelector((state) => state.auth);
@@ -13,6 +16,7 @@ const CandiList = () => {
   const {AllCandidate} = candi;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(()=>{
     dispatch(getAllCandi(currentUser.token, currentUser.id));
@@ -23,6 +27,9 @@ const CandiList = () => {
     dispatch(ArrowClickButton(item, string));
   }
 
+  const handleClick=(item)=>{
+    navigate("/interview",{state:item})
+  }
 
   return (
     <div><h3>Candidate List</h3>
@@ -59,10 +66,8 @@ const CandiList = () => {
               </button>          
           </li>
 
-          <li>
-              <button >
-              INTERVIEW
-              </button> 
+          <li> 
+              <button onClick={()=>handleClick(item)} >INTERVIEW</button> 
           </li>
 
           <li>

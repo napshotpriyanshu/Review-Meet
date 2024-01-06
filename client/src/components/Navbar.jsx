@@ -20,7 +20,7 @@ function Navbar(){
 
             <ul>
                 <li>
-                    <Link to={"/profile"}>Profile</Link>
+                    <Link to={"/userprofile"}>Profile</Link>
                 </li>
                 <li>
                     <div className="logout-cover">

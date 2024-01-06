@@ -6,6 +6,8 @@ import CandiList from '../../components/candimanager/CandiList';
 import Navbar from '../../components/Navbar';
 
 const candidateManage = () => {
+
+    
   return (
     
     <div>

@@ -70,6 +70,7 @@ try{
 				token,
 				username:username,
 				email: userLogin.email,
+                name: userLogin.name,
 				id: userLogin._id,
 				createdAt: userLogin.createdAt,
 			});
@@ -195,6 +196,14 @@ router.put('/:id', async(req,res)=>{
     } catch (error) {
         console.log(error);
     }
+});
+
+
+router.post('/interview', async (req, res) => {
+
+    console.log(req.body);
+
+    
 });
 
 module.exports = router;
