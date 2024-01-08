@@ -4,7 +4,7 @@ import './interview.scss'
 import Sidebar from '../sidebar/Sidebar'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { interviewPlace } from '../../redux/interviewSlice';
+import { interviewCheck, interviewPlace } from '../../redux/interviewSlice';
 import { SelectClickButton } from '../../redux/candidateSlice';
 
 const Interview = () => {
@@ -17,7 +17,7 @@ const Interview = () => {
 
     const resultCheck = ()=>{
         try {
-            dispatch();
+            dispatch(interviewCheck(candi._id));
             
         } catch (error) {
             console.log(error);

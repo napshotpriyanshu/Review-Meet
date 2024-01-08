@@ -238,4 +238,15 @@ router.post('/interview', async (req, res) => {
     }
 });
 
+router.get('/getinterview', async (req, res) => {
+    // console.log(req.query);
+    const interviewFind = await interview.findOne({cretedBy:req.query.id});
+    if(interviewFind){
+        console.log(interviewFind);
+    }else{
+        console.log('not present')
+    }
+    res.status(200).send(interviewFind);
+});
+
 module.exports = router;

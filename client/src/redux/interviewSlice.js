@@ -50,10 +50,22 @@ export const interviewPlace = (interview, id) => async(dispatch)=>{
     }
 };
 
-export const interviewCheck = (token, id) => async (dispatch) => {
+export const interviewCheck = (id) => async (dispatch) => {
     try {
+        const config = {
+            params: {
+                id,
+            },
+        };
 
-        const res = await axios.get('/getinterview');
+        const res = await axios.get('/getinterview',config);
+        if(res) {
+            //navigate to result
+            console.log(res);
+        }else{
+            //do nothing
+            console.log(res);
+        }
     } catch (error) {
         console.log(error);
     }
