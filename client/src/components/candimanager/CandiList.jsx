@@ -32,7 +32,8 @@ const CandiList = () => {
   }
 
  const handleClickResult =()=>{
-    navigate("/result", null)
+    navigate("/result", null
+     )
  }
 
   return (

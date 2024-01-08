@@ -160,7 +160,13 @@ router.put('/:id', async(req,res)=>{
     const {id, status, string} =req.body;
     try {
         const candi = await candidate.findById({_id:id});
-        if(string == 'backword'){
+        if (string === 'InterviewPage'){
+            
+            candi.status=status;
+            candi.save();
+            return res.send(candi);
+        }
+        else if(string == 'backword'){
             if(candi.status=='Selected'){
                 candi.status = 'On Hold';
                 candi.save();
@@ -177,13 +183,13 @@ router.put('/:id', async(req,res)=>{
                 return res.send(candi);
             }
         }
-        else if (string == 'forward'){
+        else if (string === 'forward'){
             if(candi.status=='Pending'){
                 candi.status = 'Not Selected';
                 candi.save();
                 return res.send(candi);
             }
-            else if(candi.status=='Not Selected'){
+            else if(candi.status==='Not Selected'){
                 candi.status = 'On Hold';
                 candi.save();
                 return res.send(candi);
@@ -194,6 +200,12 @@ router.put('/:id', async(req,res)=>{
                 return res.send(candi);
             }
         }
+        else if (string === 'InterviewPage'){
+            candi.status=status;
+            candi.save();
+            return res.send(candi);
+        }
+
     } catch (error) {
         console.log(error);
     }

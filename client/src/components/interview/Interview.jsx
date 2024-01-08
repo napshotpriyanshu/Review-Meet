@@ -5,6 +5,7 @@ import Sidebar from '../sidebar/Sidebar'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { interviewPlace } from '../../redux/interviewSlice';
+import { SelectClickButton } from '../../redux/candidateSlice';
 
 const Interview = () => {
     
@@ -13,7 +14,27 @@ const Interview = () => {
     const dispatch = useDispatch();
 
     const candi = location.state;
+
+    const resultCheck = ()=>{
+        try {
+            dispatch();
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
     
+    useEffect(()=>{
+        resultCheck();
+    },[]);
+    
+
+    const [selectedStatus, setSelectedStatus] = useState(candi.status);
+  
+    const handleStatusChange = (e)=>{
+        setSelectedStatus(e.target.value);
+        dispatch(SelectClickButton(candi,e.target.value,"InterviewPage"));
+    }
 
     const [count, setCount] = useState(0);
 
@@ -80,10 +101,24 @@ const Interview = () => {
                             <h5>Candidate Name: {candi.name}</h5>
                             <p>Email ID: {candi.email}</p>
                             <p>Phone Number: {candi.phone}</p>
+                            <select
+                                value={selectedStatus}
+                                onChange={handleStatusChange}
+                                defaultValue={candi.status}
+                            >
+                                <option value="Pending">Pending</option>
+                                <option value="Not Selected">Not Selected</option>
+                                <option value="On Hold">On Hold</option>
+                                <option value="Selected">Selected</option>
+                            </select>
                         </div>
+                        {selectedStatus}
                     </div>
 
                     <div className="card">
+                        <progress value={count+1} max={3}/>
+
+                        
                         <div className="card1_header">
                             <p>Question {count+1}</p>
                         </div>

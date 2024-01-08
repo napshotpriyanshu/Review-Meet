@@ -48,4 +48,14 @@ export const interviewPlace = (interview, id) => async(dispatch)=>{
         console.log(error);
         dispatch(interviewFailed());
     }
-}
+};
+
+export const interviewCheck = (token, id) => async (dispatch) => {
+    try {
+
+        const res = await axios.get('/getinterview');
+    } catch (error) {
+        console.log(error);
+    }
+
+};

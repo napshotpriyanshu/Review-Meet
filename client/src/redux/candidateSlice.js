@@ -85,7 +85,8 @@ export const getAllCandi = (token, id) => async (dispatch) => {
 };
 
 export const ArrowClickButton = (item,string) => async (dispatch)=>{
-    const candiData ={
+    
+        const candiData ={
         id:item._id,
         status:item.status,
         string: string, 
@@ -97,5 +98,20 @@ export const ArrowClickButton = (item,string) => async (dispatch)=>{
     } catch (error) {
         console.log(error)
     }
+
+};
+
+export const SelectClickButton = (item,selectStatus,string) => async (dispatch)=>{
+    const candiData={
+        id:item._id,
+        status:selectStatus,
+        string: string, 
+    }
+    try {
+        const res = await axios.put(`/${candiData.id}`, candiData) 
+        
+      } catch (error) {
+          console.log(error)
+      }
 
 };
