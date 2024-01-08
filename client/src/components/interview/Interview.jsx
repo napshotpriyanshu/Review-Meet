@@ -17,7 +17,7 @@ const Interview = () => {
 
     const resultCheck = ()=>{
         try {
-            dispatch();
+            // dispatch();
             
         } catch (error) {
             console.log(error);
