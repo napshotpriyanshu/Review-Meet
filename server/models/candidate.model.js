@@ -1,5 +1,6 @@
 const { Timestamp } = require('bson');
 const mongooose = require('mongoose');
+const interview = require('./interview.modal')
 
 const candidateSchema = mongooose.Schema({
     name: {
@@ -22,6 +23,7 @@ const candidateSchema = mongooose.Schema({
         ref:'User',
     }
 }, {Timestamp: true} );
+
 
 const candidate = mongooose.model('candidate', candidateSchema);
 module.exports= candidate;

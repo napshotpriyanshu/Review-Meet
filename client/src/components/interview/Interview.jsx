@@ -3,9 +3,9 @@ import Navbar from '../Navbar'
 import './interview.scss'
 import Sidebar from '../sidebar/Sidebar'
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { interviewCheck, interviewPlace } from '../../redux/interviewSlice';
-import { SelectClickButton } from '../../redux/candidateSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {  interviewPlace } from '../../redux/interviewSlice';
+import { SelectClickButton, interviewCheck } from '../../redux/candidateSlice';
 
 const Interview = () => {
     
@@ -14,14 +14,19 @@ const Interview = () => {
     const dispatch = useDispatch();
 
     const candi = location.state;
+    const inter = useSelector((state)=>state.candidate);
+    const {Currentinterview}= inter;
 
     const resultCheck = ()=>{
-        try {
-            dispatch(interviewCheck(candi._id));
-            
-        } catch (error) {
-            console.log(error);
-        }
+        // try {
+        //     dispatch(interviewCheck(candi._id));
+        //     if(Currentinterview){
+        //         navigate('/result');
+        //     }
+        //     console.log(Currentinterview);
+        // } catch (error) {
+        //     console.log(error);
+        // }
     }
     
     useEffect(()=>{
@@ -77,8 +82,8 @@ const Interview = () => {
             // localStorage.setItem('questions',interviewJSON);
 
             dispatch(interviewPlace(interview, candi._id));
-            
-            navigate('/result', interview);
+            console.log(interview);
+            navigate('/result', {state:interview});
         }
 
     }

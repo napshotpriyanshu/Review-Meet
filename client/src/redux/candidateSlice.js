@@ -14,6 +14,7 @@ const initalCandidate = localStorage.getItem('candidate')
 export const candidateSlice = createSlice({
     name:'Candidate',
     initialState:initialState,
+    Currentinterview: {},
 
     reducers:{
         candidateAddedSuccess:(state, action)=>{
@@ -28,12 +29,29 @@ export const candidateSlice = createSlice({
         getAllCandidateFailed:(state, action)=>{
             return state;
         },
+        getinterviewSuccess: (state, action) => {
+            state.Currentinterview = action.payload;
+        },
+        getinterviewFailed: (state, action) => {
+            state.Currentinterview = action.payload;
+        },
+        editCandiSuccess: (state, action) => {
+			state.candidateData = action.payload;
+		},
+
+		deleteSuccess: (state, action) => {
+			state.candidateData = action.payload;
+		},
+		deletefail: (state) => {
+			return state;
+		},
     }
 
 });
 
 export const{
-    candidateAddedFailed, candidateAddedSuccess, getAllCandidateSuccess, getAllCandidateFailed
+    candidateAddedFailed, candidateAddedSuccess, getAllCandidateSuccess, getAllCandidateFailed,
+    getinterviewSuccess, getinterviewFailed, editCandiSuccess, deleteSuccess,deletefail
 } = candidateSlice.actions;
 
 export default candidateSlice.reducer;
@@ -74,7 +92,7 @@ export const getAllCandi = (token, id) => async (dispatch) => {
         };
 
         let res = await axios.get('/getcandi', config);
-        console.log(res);
+        // console.log(res);
         if(res){
             dispatch(getAllCandidateSuccess(res.data));
         }
@@ -114,4 +132,45 @@ export const SelectClickButton = (item,selectStatus,string) => async (dispatch)=
           console.log(error)
       }
 
+};
+
+// export const interviewCheck = (id) => async (dispatch) => {
+//     try {
+//         const config = {
+//             params: {
+//                 id,
+//             },
+//         };
+
+//         const res = await axios.get('/getinterview',config);
+//         if(res.status===200) {
+//             //navigate to result
+//             dispatch(getinterviewSuccess(res.data));
+//             console.log('happy');
+//         }else if(res.status===204){
+//             dispatch(getinterviewFailed());
+//             console.log('sad');
+//         }
+//     } catch (error) {
+//         console.log(error);
+//     }
+
+// };
+
+export const deleteCandi = (id) => async (dispatch) => {
+    try {
+     
+    let res = await axios.delete(`/${id}`);
+
+    if (res) {
+		dispatch(deleteSuccess());
+		window.location.reload();
+        // console.log(res,'deleted');
+	} else {
+		dispatch(deletefail());
+        console.log('note')
+	}   
+} catch (error) {
+    console.log(error)
+}
 };

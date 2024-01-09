@@ -7,12 +7,12 @@ const initalInterview = localStorage.getItem('interview')
 
 const initialState = {
     interviewData: initalInterview,
-    Allinterview: {},
+    Currentinterview: {},
 }
 
 export const interviewSlice = createSlice({
     name: 'Interview',
-    initialState,
+    initialState:initialState,
 
     reducers: {
         interviewSuccess: (state, action) => {
@@ -21,17 +21,24 @@ export const interviewSlice = createSlice({
         interviewFailed: (state, action) => {
             return state;
         },
+        getinterviewSuccess: (state, action) => {
+            state.Currentinterview = action.payload;
+        },
+        getinterviewFailed: (state, action) => {
+            state.Currentinterview = {};
+        },
     }
 });
 
 export const {
-    interviewFailed, interviewSuccess
+    interviewFailed, interviewSuccess, getinterviewSuccess, getinterviewFailed
 } = interviewSlice.actions;
 
 export default interviewSlice.reducer;
 
 export const interviewPlace = (interview, id) => async(dispatch)=>{
     try {
+        // console.log(interview);
         const interviewData={
             interview, id
         };
@@ -50,24 +57,25 @@ export const interviewPlace = (interview, id) => async(dispatch)=>{
     }
 };
 
-export const interviewCheck = (id) => async (dispatch) => {
-    try {
-        const config = {
-            params: {
-                id,
-            },
-        };
+// export const interviewCheck = (id) => async (dispatch) => {
+//     try {
+//         const config = {
+//             params: {
+//                 id,
+//             },
+//         };
 
-        const res = await axios.get('/getinterview',config);
-        if(res) {
-            //navigate to result
-            console.log(res);
-        }else{
-            //do nothing
-            console.log(res);
-        }
-    } catch (error) {
-        console.log(error);
-    }
+//         const res = await axios.get('/getinterview',config);
+//         if(res.status===200) {
+//             //navigate to result
+//             dispatch(getinterviewSuccess(res.data));
+//             console.log('happy',res.data);
+//         }else if(res.status===204){
+//             dispatch(getinterviewFailed());
+//             console.log('sad');
+//         }
+//     } catch (error) {
+//         console.log(error);
+//     }
 
-};
+// };

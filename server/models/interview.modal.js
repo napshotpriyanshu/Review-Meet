@@ -45,5 +45,9 @@ const interviewSchema = mongooose.Schema({
 
 }, {Timestamp: true} );
 
+interviewSchema.post('remove', async function(next){
+    
+});
+
 const interview = mongooose.model('interview', interviewSchema);
 module.exports= interview;

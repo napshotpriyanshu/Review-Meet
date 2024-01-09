@@ -243,10 +243,39 @@ router.get('/getinterview', async (req, res) => {
     const interviewFind = await interview.findOne({cretedBy:req.query.id});
     if(interviewFind){
         console.log(interviewFind);
+        res.status(200).send(interviewFind);
     }else{
-        console.log('not present')
+        console.log('not present');
+        res.status(204).send('interview not present');
     }
-    res.status(200).send(interviewFind);
+});
+
+router.delete('/:id', async(req,res, next)=>{
+    console.log(req.params);
+    try {
+		const candidateDeleted = await candidate.findByIdAndDelete(req.params.id);
+        
+
+        //working on child deleted if parent deleted , cascade delete
+        // const candidateDeleted = await candidate.findById(req.params.id, function(err,Candidate){
+        //     interview.remove({
+        //         "_id":{
+        //             $in:Candidate._id
+        //         }
+        //     },function(err){
+        //         if(err) return next(err);
+        //         candidate.remove();
+    
+        //     });
+        // });
+        
+
+
+		return res.status(200).send(candidateDeleted);
+	} catch (error) {
+        
+		return res.status(400).send('deleteFailed');
+	}
 });
 
 module.exports = router;
