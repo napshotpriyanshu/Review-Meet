@@ -3,9 +3,15 @@ import { Link , useNavigate} from "react-router-dom";
 import logo from "../images/logo.png";
 import login_png from "../images/image3.png";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/authSlice";
 
 const Login = () => {
-    const navigate = useNavigate();
+
+    
+    const dispatch = useDispatch();
+
+
     const [userLogin, setUserLogin] = useState({
         username:"", password:""
     });
@@ -23,16 +29,13 @@ const Login = () => {
     const handleClick = async(event)=>{
         // const{username, password} = userLogin;
         
-        const res = await axios.post("/Login", userLogin);
+        dispatch(
+            login({
+                username:userLogin.username,
+                password:userLogin.password,
+            })
+        );
         
-        if(!res || res.data.status === 400){
-            console.log("Invalid Data");
-        }else{
-            navigate('/home');
-            console.log("Successfull");
-            console.log(res);
-            
-        }
     }
 
 

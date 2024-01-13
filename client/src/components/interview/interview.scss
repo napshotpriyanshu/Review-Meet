@@ -1,0 +1,18 @@
+.container{
+    &_left{
+        width: 15%;
+    }
+    &_right{
+        width: 85%;
+        display: flex;
+    }
+}
+
+// .card{
+//     background-color: antiquewhite;
+    
+// }
+// .card_body1{
+//     background-color: azure;
+// }
+ 

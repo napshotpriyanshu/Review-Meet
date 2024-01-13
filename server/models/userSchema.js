@@ -28,29 +28,6 @@ const userSchema = new mongoose.Schema({
             required:true
         }
     }],
-    // newCandidate: [{
-    //     name:{
-    //         type: String,
-    //     },
-    //     email:{
-    //         type: String
-    //     },
-    //     phone:{
-    //         type: Number
-    //     },
-    //     interview:[{
-    //         quetion:[{
-    //             comment:{
-    //                 type: String
-    //             },
-    //             rating:{
-    //                 type: String
-    //             }
-    //         }]
-    //     }]
-
-
-    // }]
 });
 
 
